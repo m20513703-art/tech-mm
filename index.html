@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="TECH MM - Sistema de Serviços e Consertos"
+    >
+
+    <title>TECH MM | Sistema de Serviços</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ======================================================
+         CABEÇALHO
+    ======================================================= -->
+
+    <header class="cabecalho">
+
+        <div class="logo">
+
+            <div class="logo-icone">
+                TM
+            </div>
+
+            <div class="logo-texto">
+                <h1>TECH MM</h1>
+                <span>Sistema de Serviços</span>
+            </div>
+
+        </div>
+
+        <div class="status-sistema">
+            <span class="status-ponto"></span>
+            Sistema Online
+        </div>
+
+        <button
+            type="button"
+            id="btnTema"
+            class="btn-tema"
+            onclick="alternarTema()"
+            title="Alternar tema"
+        >
+            🌙
+        </button>
+
+    </header>
+
+
+    <!-- ======================================================
+         MENU PRINCIPAL
+    ======================================================= -->
+
+    <nav class="menu-principal">
+
+        <button
+            type="button"
+            class="menu-item ativo"
+            data-secao="dashboard"
+        >
+            🏠 Dashboard
+        </button>
+
+        <button
+            type="button"
+            class="menu-item"
+            data-secao="novaOrdem"
+        >
+            ➕ Nova OS
+        </button>
+
+        <button
+            type="button"
+            class="menu-item"
+            data-secao="ordens"
+        >
+            📋 Ordens
+        </button>
+
+        <button
+            type="button"
+            class="menu-item"
+            data-secao="clientes"
+        >
+            👥 Clientes
+        </button>
+
+        <button
+            type="button"
+            class="menu-item"
+            data-secao="equipamentos"
+        >
+            🔧 Equipamentos
+        </button>
+
+        <button
+            type="button"
+            class="menu-item"
+            data-secao="financeiro"
+        >
+            💰 Financeiro
+        </button>
+
+    </nav>
+
+
+    <!-- ======================================================
+         MENSAGEM DO SISTEMA
+    ======================================================= -->
+
+    <div
+        id="mensagemSistema"
+        class="mensagem-sistema"
+        hidden
+    ></div>
+
+
+    <!-- ======================================================
+         CONTEÚDO PRINCIPAL
+    ======================================================= -->
+
+    <main>
+
+
+        <!-- ==================================================
+             DASHBOARD
+        =================================================== -->
+
+        <section
+            id="dashboard"
+            class="secao ativa"
+        >
+
+            <div class="titulo-secao">
+
+                <span class="titulo-pequeno">
+                    VISÃO GERAL
+                </span>
+
+                <h2>
+                    Dashboard
+                </h2>
+
+                <p>
+                    Acompanhe os serviços e o movimento da sua assistência.
+                </p>
+
+            </div>
+
+
+            <div class="cards-dashboard">
+
+                <div class="card-dashboard">
+
+                    <div class="card-icone">
+                        📋
+                    </div>
+
+                    <div>
+                        <span>
+                            Total de OS
+                        </span>
+
+                        <strong id="totalOrdens">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="card-dashboard">
+
+                    <div class="card-icone">
+                        🔧
+                    </div>
+
+                    <div>
+                        <span>
+                            Em andamento
+                        </span>
+
+                        <strong id="totalAndamento">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="card-dashboard">
+
+                    <div class="card-icone">
+                        📦
+                    </div>
+
+                    <div>
+                        <span>
+                            Aguardando peça
+                        </span>
+
+                        <strong id="totalPecas">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="card-dashboard">
+
+                    <div class="card-icone">
+                        ✅
+                    </div>
+
+                    <div>
+                        <span>
+                            Prontos
+                        </span>
+
+                        <strong id="totalProntos">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ATALHOS -->
+
+            <div class="painel">
+
+                <div class="painel-header">
+
+                    <div>
+
+                        <span class="titulo-pequeno">
+                            ACESSO RÁPIDO
+                        </span>
+
+                        <h3>
+                            Atalhos
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="atalhos">
+
+                    <button
+                        type="button"
+                        class="atalho"
+                        data-abrir="novaOrdem"
+                    >
+
+                        <span class="atalho-icone">
+                            ➕
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Nova Ordem de Serviço
+                            </strong>
+
+                            <small>
+                                Cadastrar um novo serviço
+                            </small>
+
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="atalho"
+                        data-abrir="ordens"
+                    >
+
+                        <span class="atalho-icone">
+                            📋
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Ver Ordens de Serviço
+                            </strong>
+
+                            <small>
+                                Consultar serviços cadastrados
+                            </small>
+
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ORDENS RECENTES -->
+
+            <div class="painel">
+
+                <div class="painel-header">
+
+                    <div>
+
+                        <span class="titulo-pequeno">
+                            ÚLTIMOS SERVIÇOS
+                        </span>
+
+                        <h3>
+                            Ordens recentes
+                        </h3>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="btn-secundario"
+                        data-abrir="ordens"
+                    >
+                        Ver todas
+                    </button>
+
+                </div>
+
+
+                <div id="ordensRecentes">
+
+                    <div class="estado-vazio">
+
+                        <div class="estado-icone">
+                            📋
+                        </div>
+
+                        <strong>
+                            Nenhuma ordem cadastrada
+                        </strong>
+
+                        <p>
+                            As ordens de serviço recentes aparecerão aqui.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             NOVA ORDEM DE SERVIÇO
+        =================================================== -->
+
+        <section
+            id="novaOrdem"
+            class="secao"
+            hidden
+        >
+
+            <div class="titulo-secao">
+
+                <span class="titulo-pequeno">
+                    ATENDIMENTO
+                </span>
+
+                <h2>
+                    Nova Ordem de Serviço
+                </h2>
+
+                <p>
+                    Cadastre o cliente, equipamento, serviço e valores.
+                </p>
+
+            </div>
+
+
+            <form id="formOrdem">
+
+
+                <!-- CLIENTE -->
+
+                <div class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <span class="titulo-pequeno">
+                                ETAPA 01
+                            </span>
+
+                            <h3>
+                                Dados do cliente
+                            </h3>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            id="btnNovoCliente"
+                            class="btn-laranja"
+                        >
+                            + Novo cliente
+                        </button>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="campo">
+
+                            <label for="clienteOS">
+                                Cliente *
+                            </label>
+
+                            <select
+                                id="clienteOS"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecione um cliente
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="telefoneClienteOS">
+                                WhatsApp
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="telefoneClienteOS"
+                                placeholder="(00) 00000-0000"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="emailClienteOS">
+                                E-mail
+                            </label>
+
+                            <input
+                                type="email"
+                                id="emailClienteOS"
+                                placeholder="cliente@email.com"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EQUIPAMENTO -->
+
+                <div class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <span class="titulo-pequeno">
+                                ETAPA 02
+                            </span>
+
+                            <h3>
+                                Equipamento / Veículo
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="campo">
+
+                            <label for="tipoAparelho">
+                                Tipo de equipamento *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="tipoAparelho"
+                                placeholder="Ex.: TV, celular, geladeira, carro..."
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="marcaAparelho">
+                                Marca
+                            </label>
+
+                            <input
+                                type="text"
+                                id="marcaAparelho"
+                                placeholder="Ex.: Samsung"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="modeloAparelho">
+                                Modelo
+                            </label>
+
+                            <input
+                                type="text"
+                                id="modeloAparelho"
+                                placeholder="Modelo do equipamento"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="anoEquipamento">
+                                Ano
+                            </label>
+
+                            <input
+                                type="number"
+                                id="anoEquipamento"
+                                placeholder="2026"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="numeroSerie">
+                                Número de série
+                            </label>
+
+                            <input
+                                type="text"
+                                id="numeroSerie"
+                                placeholder="Número de série"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="placaVeiculo">
+                                Placa do veículo
+                            </label>
+
+                            <input
+                                type="text"
+                                id="placaVeiculo"
+                                placeholder="ABC1D23"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROBLEMA -->
+
+                <div class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <span class="titulo-pequeno">
+                                ETAPA 03
+                            </span>
+
+                            <h3>
+                                Problema apresentado
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="campo campo-full">
+
+                            <label for="defeito">
+                                Defeito / problema relatado *
+                            </label>
+
+                            <textarea
+                                id="defeito"
+                                placeholder="Descreva o problema informado pelo cliente..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="campo campo-full">
+
+                            <label for="diagnostico">
+                                Diagnóstico
+                            </label>
+
+                            <textarea
+                                id="diagnostico"
+                                placeholder="Diagnóstico realizado pelo técnico..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="estadoAparelho">
+                                Estado do equipamento
+                            </label>
+
+                            <select id="estadoAparelho">
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                <option value="Bom estado">
+                                    Bom estado
+                                </option>
+
+                                <option value="Com marcas de uso">
+                                    Com marcas de uso
+                                </option>
+
+                                <option value="Danificado">
+                                    Danificado
+                                </option>
+
+                                <option value="Incompleto">
+                                    Incompleto
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="observacoesOS">
+                                Observações
+                            </label>
+
+                            <textarea
+                                id="observacoesOS"
+                                placeholder="Outras observações..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SERVIÇO -->
+
+                <div class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <span class="titulo-pequeno">
+                                ETAPA 04
+                            </span>
+
+                            <h3>
+                                Serviço
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="campo campo-full">
+
+                            <label for="descricaoServico">
+                                Serviço a realizar *
+                            </label>
+
+                            <textarea
+                                id="descricaoServico"
+                                placeholder="Descreva o serviço que será realizado..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="tecnicoResponsavel">
+                                Técnico responsável
+                            </label>
+
+                            <input
+                                type="text"
+                                id="tecnicoResponsavel"
+                                placeholder="Nome do técnico"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="prazoOS">
+                                Prazo
+                            </label>
+
+                            <input
+                                type="text"
+                                id="prazoOS"
+                                placeholder="Ex.: 3 dias"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VALORES -->
+
+                <div class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <span class="titulo-pequeno">
+                                ETAPA 05
+                            </span>
+
+                            <h3>
+                                Valores
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="campo">
+
+                            <label for="valorConserto">
+                                Valor do conserto / serviço
+                            </label>
+
+                            <input
+                                type="number"
+                                id="valorConserto"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="valorPecas">
+                                Valor das peças
+                            </label>
+
+                            <input
+                                type="number"
+                                id="valorPecas"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="valorMaoObra">
+                                Mão de obra
+                            </label>
+
+                            <input
+                                type="number"
+                                id="valorMaoObra"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="descontoOS">
+                                Desconto
+                            </label>
+
+                            <input
+                                type="number"
+                                id="descontoOS"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                            >
+
+                        </div>
+
+
+                        <div class="total-destaque">
+
+                            <span>
+                                TOTAL DA ORDEM
+                            </span>
+
+                            <strong id="totalOS">
+                                R$ 0,00
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAGAMENTO -->
+
+                <div class="painel">
+
+                    <div class="painel-header">
+
+                        <div>
+
+                            <span class="titulo-pequeno">
+                                ETAPA 06
+                            </span>
+
+                            <h3>
+                                Pagamento
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="campo">
+
+                            <label for="formaPagamento">
+                                Forma de pagamento
+                            </label>
+
+                            <select id="formaPagamento">
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                <option value="Pix">
+                                    Pix
+                                </option>
+
+                                <option value="Dinheiro">
+                                    Dinheiro
+                                </option>
+
+                                <option value="Débito">
+                                    Cartão de débito
+                                </option>
+
+                                <option value="Crédito">
+                                    Cartão de crédito
+                                </option>
+
+                                <option value="Transferência">
+                                    Transferência
+                                </option>
+
+                                <option value="Outro">
+                                    Outro
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="statusPagamento">
+                                Status do pagamento
+                            </label>
+
+                            <select id="statusPagamento">
+
+                                <option value="Pendente">
+                                    Pendente
+                                </option>
+
+                                <option value="Pago">
+                                    Pago
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="garantiaOS">
+                                Garantia
+                            </label>
+
+                            <input
+                                type="text"
+                                id="garantiaOS"
+                                placeholder="Ex.: 90 dias"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOTÕES -->
+
+                <div class="form-acoes">
+
+                    <button
+                        type="button"
+                        class="btn-secundario"
+                        onclick="limparFormularioOS()"
+                    >
+                        Limpar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-laranja"
+                    >
+                        💾 Cadastrar Ordem de Serviço
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ==================================================
+             ORDENS
+        =================================================== -->
+
+        <section
+            id="ordens"
+            class="secao"
+            hidden
+        >
+
+            <div class="titulo-secao">
+
+                <span class="titulo-pequeno">
+                    SERVIÇOS
+                </span>
+
+                <h2>
+                    Ordens de Serviço
+                </h2>
+
+                <p>
+                    Consulte e acompanhe todas as ordens cadastradas.
+                </p>
+
+            </div>
+
+
+            <div class="painel">
+
+                <div class="busca">
+
+                    <input
+                        type="search"
+                        id="buscarOrdem"
+                        placeholder="🔎 Buscar por OS, cliente, equipamento..."
+                    >
+
+                </div>
+
+
+                <div class="filtros">
+
+                    <button
+                        type="button"
+                        class="filtro ativo"
+                        data-filtro="todas"
+                    >
+                        Todas
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filtro"
+                        data-filtro="aberta"
+                    >
+                        Abertas
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filtro"
+                        data-filtro="analise"
+                    >
+                        Em análise
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filtro"
+                        data-filtro="andamento"
+                    >
+                        Em conserto
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filtro"
+                        data-filtro="peca"
+                    >
+                        Aguardando peça
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filtro"
+                        data-filtro="pronto"
+                    >
+                        Prontos
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filtro"
+                        data-filtro="entregue"
+                    >
+                        Entregues
+                    </button>
+
+                </div>
+
+
+                <div id="listaOrdens">
+
+                    <div class="estado-vazio">
+
+                        <div class="estado-icone">
+                            📋
+                        </div>
+
+                        <strong>
+                            Nenhuma ordem encontrada
+                        </strong>
+
+                        <p>
+                            Cadastre uma nova ordem de serviço para começar.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             CLIENTES
+        =================================================== -->
+
+        <section
+            id="clientes"
+            class="secao"
+            hidden
+        >
+
+            <div class="titulo-secao">
+
+                <span class="titulo-pequeno">
+                    CADASTRO
+                </span>
+
+                <h2>
+                    Clientes
+                </h2>
+
+                <p>
+                    Gerencie os clientes cadastrados no sistema.
+                </p>
+
+            </div>
+
+
+            <div class="painel">
+
+                <div class="painel-header">
+
+                    <div>
+
+                        <div class="busca">
+
+                            <input
+                                type="search"
+                                id="buscarCliente"
+                                placeholder="🔎 Buscar cliente..."
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="btnNovoClienteClientes"
+                        class="btn-laranja"
+                        onclick="abrirModalCliente()"
+                    >
+                        + Novo cliente
+                    </button>
+
+                </div>
+
+
+                <div id="listaClientes">
+
+                    <div class="estado-vazio">
+
+                        <div class="estado-icone">
+                            👥
+                        </div>
+
+                        <strong>
+                            Nenhum cliente cadastrado
+                        </strong>
+
+                        <p>
+                            Os clientes cadastrados aparecerão aqui.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             EQUIPAMENTOS
+        =================================================== -->
+
+        <section
+            id="equipamentos"
+            class="secao"
+            hidden
+        >
+
+            <div class="titulo-secao">
+
+                <span class="titulo-pequeno">
+                    CADASTRO
+                </span>
+
+                <h2>
+                    Equipamentos
+                </h2>
+
+                <p>
+                    Consulte os equipamentos e veículos cadastrados.
+                </p>
+
+            </div>
+
+
+            <div class="painel">
+
+                <div class="busca">
+
+                    <input
+                        type="search"
+                        id="buscarAparelho"
+                        placeholder="🔎 Buscar equipamento, marca ou modelo..."
+                    >
+
+                </div>
+
+
+                <div id="listaAparelhos">
+
+                    <div class="estado-vazio">
+
+                        <div class="estado-icone">
+                            🔧
+                        </div>
+
+                        <strong>
+                            Nenhum equipamento cadastrado
+                        </strong>
+
+                        <p>
+                            Os equipamentos aparecerão aqui após o cadastro das OS.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             FINANCEIRO
+        =================================================== -->
+
+        <section
+            id="financeiro"
+            class="secao"
+            hidden
+        >
+
+            <div class="titulo-secao">
+
+                <span class="titulo-pequeno">
+                    CONTROLE
+                </span>
+
+                <h2>
+                    Financeiro
+                </h2>
+
+                <p>
+                    Acompanhe os valores das ordens de serviço.
+                </p>
+
+            </div>
+
+
+            <div class="cards-financeiro">
+
+                <div class="card-financeiro">
+
+                    <span>
+                        RECEBIDO
+                    </span>
+
+                    <strong id="totalRecebido">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="card-financeiro">
+
+                    <span>
+                        A RECEBER
+                    </span>
+
+                    <strong id="totalReceber">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="card-financeiro">
+
+                    <span>
+                        TOTAL EM SERVIÇOS
+                    </span>
+
+                    <strong id="totalServicos">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="painel">
+
+                <div class="painel-header">
+
+                    <div>
+
+                        <span class="titulo-pequeno">
+                            MOVIMENTAÇÕES
+                        </span>
+
+                        <h3>
+                            Histórico financeiro
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div id="movimentacoesFinanceiras">
+
+                    <div class="estado-vazio">
+
+                        <div class="estado-icone">
+                            💰
+                        </div>
+
+                        <strong>
+                            Nenhuma movimentação
+                        </strong>
+
+                        <p>
+                            Os registros financeiros aparecerão aqui.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ======================================================
+         NOSSO ENDEREÇO
+    ======================================================= -->
+
+    <section class="painel painel-endereco">
+
+        <div class="painel-header">
+
+            <div>
+
+                <span class="titulo-pequeno">
+                    LOCALIZAÇÃO
+                </span>
+
+                <h3>
+                    Onde estamos
+                </h3>
+
+            </div>
+
+        </div>
+
+        <div class="endereco-tech">
+
+            <div class="endereco-icone">
+                📍
+            </div>
+
+            <div class="endereco-info">
+
+                <strong>
+                    TECH MM
+                </strong>
+
+                <p>
+                    Rua Guanabara, nº 26
+                </p>
+
+                <p>
+                    Divinolândia - SP
+                </p>
+
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query=Rua%20Guanabara%2026%2C%20Divinol%C3%A2ndia%2C%20SP"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-laranja"
+                >
+                    🗺️ Como chegar
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         RODAPÉ
+    ======================================================= -->
+
+    <footer>
+
+        <strong>
+            TECH MM
+        </strong>
+
+        — Sistema de Serviços e Consertos
+
+        <br>
+
+        <span>
+            Rua Guanabara, nº 26 — Divinolândia/SP
+        </span>
+
+        <br>
+
+        <span>
+            Sistema desenvolvido para gerenciamento de serviços.
+        </span>
+
+    </footer>
+
+
+    <!-- ======================================================
+         JAVASCRIPT
+    ======================================================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
